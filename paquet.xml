@@ -1,8 +1,8 @@
 <paquet
 	prefix="ptmspip"
-	version="0.0.1-dev"
+	version="0.0.1"
 	etat="dev"
-	compatibilite="[4.2.0;4.4.*]"
+	compatibilite="[4.3.0;4.4.*]"
 	documentation="https://github.com/jasmin-abernathy/pixel-trackers-manager-spip"
 >
 	<nom>Pixel Trackers Manager — SPIP</nom>
@@ -10,5 +10,9 @@
 	<licence>GNU/GPL v2 ou ultérieure</licence>
 
 	<pipeline nom="autoriser" inclure="ptmspip_autorisations.php" />
-	<menu nom="ptmspip" titre="ptmspip:titre_menu" />
+	<pipeline nom="insert_head" inclure="ptmspip_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="ptmspip_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="ptmspip_pipelines.php" />
+
+	<menu nom="ptmspip" titre="ptmspip:titre_menu" parent="menu_activite" action="ptmspip" position="30" />
 </paquet>
