@@ -4,30 +4,18 @@
 
 <div class="notice">
 	<strong><:ptmspip:statut_dev:></strong>
-	<p><:ptmspip:intro:></p>
+	<p>Le premier scanner réel est disponible en mode développement. Il lit uniquement le HTML public et ne modifie ni contenu, ni squelette, ni consentement.</p>
 </div>
 
+#FORMULAIRE_PTM_SPIP_SCAN
+
 <div class="box">
-	<h2><:ptmspip:environnement:></h2>
+	<h2>Limites de cette première version</h2>
 	<ul class="spip">
-		<li>SPIP : <code>#EVAL{_SPIP_VERSION}</code></li>
-		<li>PHP : <code>#EVAL{PHP_VERSION}</code></li>
-		<li>Catalogue de règles : [(#CHEMIN{data/rules.json}|oui)présent][(#CHEMIN{data/rules.json}|non)absent]</li>
+		<li>accueil, articles publiés, rubriques publiées et page <code>mentions</code> sont recensés ;</li>
+		<li>5 pages maximum sont traitées par requête ;</li>
+		<li>les signatures connues sont classées comme preuves actives ;</li>
+		<li>les domaines tiers inconnus chargés par script, iframe, image, feuille de style ou média sont signalés pour vérification humaine ;</li>
+		<li>aucun mécanisme de blocage/consentement n’est encore activé.</li>
 	</ul>
-</div>
-
-<div class="box">
-	<h2><:ptmspip:fonctions_preparees:></h2>
-	<ul class="spip">
-		<li>socle de plugin et droits d’accès administrateur ;</li>
-		<li>catalogue de signatures indépendant du CMS ;</li>
-		<li>analyseur HTML local minimal ;</li>
-		<li>points d’accroche <code>insert_head</code>, <code>affichage_final</code> et tâches planifiées préparés mais inactifs par défaut ;</li>
-		<li>architecture prévue pour scan, journal, documentation et consentement.</li>
-	</ul>
-</div>
-
-<div class="box">
-	<h2><:ptmspip:attente_audit:></h2>
-	<p>L’audit du site Vues Imprenables a validé l’approche par HTML rendu. Les fonctions de modification restent désactivées tant qu’elles ne sont pas testées sur une copie isolée.</p>
 </div>

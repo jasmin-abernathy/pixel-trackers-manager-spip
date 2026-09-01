@@ -2,7 +2,7 @@
 
 Portage SPIP de **Pixel Trackers Manager (PTM)**, développé par **Le Potager du Web**.
 
-> État : `0.0.1` / `etat=dev` — pré-développement validé sur la structure de Vues Imprenables. Ne pas installer en production tant que le premier scan réel n'a pas été testé sur une copie isolée.
+> État : `0.0.2` / `etat=dev` — premier scan progressif codé. À tester sur une copie exécutable avant toute utilisation en production.
 
 ## Objectif
 
@@ -19,31 +19,50 @@ L'audit a confirmé notamment :
 - contenus éditoriaux injectés via `#TEXTE`, donc nécessité d'analyser le HTML public rendu ;
 - présence de Crayons, Image Typo et Squelettes par Rubrique dans `plugins/auto` ;
 - absence de tracker tiers évident codé en dur dans les squelettes fournis ;
-- scripts et polices spécifiques observés localement ;
-- page `mentions` gérée par squelette, donc à traiter en lecture/recommandation et jamais par écrasement automatique ;
+- page `mentions` gérée par squelette, donc jamais réécrite automatiquement ;
 - `affichage_final` retenu comme point de travail futur pour un blocage léger et cache-compatible ;
 - `taches_generales_cron` retenu pour les futurs scans planifiés.
 
 Voir `docs/AUDIT-VUESIMPRENABLES-2026-09-01.md`.
 
-## Ce qui est déjà préparé
+## Premier scan progressif — 0.0.2
 
-- `paquet.xml` en état `dev`, plage provisoire SPIP 4.3 à 4.4 ;
-- entrée PTM dans l'espace privé via `prive/squelettes/contenu/` ;
-- accès réservé aux administrateurs ;
-- registre JSON de signatures indépendant du CMS ;
-- analyseur HTML minimal réutilisable ;
-- pipelines `insert_head`, `affichage_final` et `taches_generales_cron` déclarés mais sans effet en production à ce stade ;
-- documentation d'architecture, matrice WordPress → SPIP et audit réel.
+La première implémentation réelle sait maintenant :
+
+- créer ses tables de scans, URLs et observations ;
+- recenser l'accueil, les articles publiés, les rubriques publiées et la page `mentions` ;
+- générer les URLs avec les fonctions natives SPIP ;
+- récupérer les pages côté serveur sans transmettre la session administrateur ;
+- traiter 5 URLs maximum par requête ;
+- poursuivre le scan si une URL échoue ;
+- détecter les signatures du catalogue PTM ;
+- signaler les ressources tierces inconnues pour vérification humaine ;
+- ignorer les simples liens sortants ;
+- afficher progression, résultats et erreurs dans l'espace privé.
+
+Le scan ne modifie aucun contenu, aucun squelette et n'active aucun mécanisme de consentement.
+
+Voir `docs/FIRST-SCAN.md`.
+
+## Architecture
+
+- `data/rules.json` : catalogue de signatures indépendant du CMS ;
+- `inc/ptmspip_scanner.php` : analyse du HTML ;
+- `inc/ptmspip_scan.php` : recensement, file d'attente et traitement progressif ;
+- `base/ptmspip.php` : tables de stockage ;
+- `formulaires/ptmspip_scan.*` : interface CVT du scanner ;
+- `prive/squelettes/contenu/ptmspip.html` : page de l'espace privé ;
+- `ptmspip_pipelines.php` : points d'accroche préparés pour la suite.
 
 ## Prochaine étape technique
 
-1. installer ce plugin sur une copie exécutable de Vues Imprenables ;
+1. installer `0.0.2` sur une copie exécutable de Vues Imprenables ;
 2. confirmer la version exacte du cœur SPIP ;
-3. recenser les URLs publiques ;
-4. réaliser un premier scan progressif en contexte anonyme ;
-5. stocker scans et observations ;
-6. seulement ensuite prototyper le blocage avant consentement.
+3. vérifier la création/mise à jour des tables ;
+4. lancer un scan complet par lots ;
+5. comparer les résultats au HTML réellement servi ;
+6. corriger les faux positifs/faux négatifs ;
+7. seulement ensuite automatiser le scan via le génie SPIP et prototyper le consentement.
 
 ## Principes
 
@@ -61,6 +80,7 @@ Voir `docs/AUDIT-VUESIMPRENABLES-2026-09-01.md`.
 - `docs/PORTAGE-MATRIX.md`
 - `docs/AUDIT-SITE-SPIP.md`
 - `docs/AUDIT-VUESIMPRENABLES-2026-09-01.md`
+- `docs/FIRST-SCAN.md`
 - `docs/ROADMAP.md`
 
 ## Licence

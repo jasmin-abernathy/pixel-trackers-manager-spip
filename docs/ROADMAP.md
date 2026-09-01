@@ -20,12 +20,15 @@
 - [x] valider `affichage_final` comme candidat au blocage léger pré-consentement ;
 - [x] valider `taches_generales_cron` pour la planification ;
 - [ ] confirmer la version exacte du cœur SPIP sur une installation exécutable ;
-- [ ] construire le recensement des URLs publiques ;
-- [ ] construire l'adaptateur de découverte SPIP ;
-- [ ] rapprocher le catalogue de signatures du PTM WordPress courant ;
-- [ ] créer les tables de scans/findings/journal ;
-- [ ] afficher un premier vrai scan progressif dans l'espace privé ;
-- [ ] tester le scan en contexte anonyme pour exclure les ajouts Crayons.
+- [x] construire le premier recensement des URLs publiques ;
+- [x] construire l'adaptateur de découverte SPIP v1 ;
+- [ ] rapprocher davantage le catalogue de signatures du PTM WordPress courant ;
+- [x] créer les tables de scans, URLs et findings ;
+- [x] afficher un premier vrai scan progressif dans l'espace privé ;
+- [x] concevoir le scan sans transmission de la session administrateur ;
+- [ ] tester le scan de bout en bout sur une copie exécutable de Vues Imprenables ;
+- [ ] mesurer et corriger faux positifs / faux négatifs ;
+- [ ] compléter le recensement si le site expose d'autres pages publiques pertinentes.
 
 ## Phase 2 — documentation et recommandations
 
