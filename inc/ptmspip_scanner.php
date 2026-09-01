@@ -27,13 +27,20 @@ function ptmspip_analyser_html($html, $page_url = '') {
 	$resultats = [];
 	$ids = [];
 
+	// Une URL présente uniquement dans un lien de navigation n'est pas une preuve
+	// qu'un service tiers est chargé par le navigateur.
+	$scan_html = preg_replace('~<a\b[^>]*>.*?</a>~is', '', $html);
+	if (!is_string($scan_html)) {
+		$scan_html = $html;
+	}
+
 	foreach ($regles['services'] as $service) {
 		if (empty($service['id']) || empty($service['patterns']) || !is_array($service['patterns'])) {
 			continue;
 		}
 
 		foreach ($service['patterns'] as $pattern) {
-			if ($pattern !== '' && stripos($html, (string) $pattern) !== false) {
+			if ($pattern !== '' && stripos($scan_html, (string) $pattern) !== false) {
 				$id = (string) $service['id'];
 				$resultats[] = [
 					'id' => $id,
@@ -49,6 +56,14 @@ function ptmspip_analyser_html($html, $page_url = '') {
 	}
 
 	foreach (ptmspip_extraire_ressources_externes($html, $page_url, $regles) as $finding) {
+		if (!isset($ids[$finding['id']])) {
+			$resultats[] = $finding;
+			$ids[$finding['id']] = true;
+		}
+	}
+
+	include_spip('inc/ptmspip_forms');
+	foreach (ptmspip_extraire_formulaires_donnees($html, $page_url) as $finding) {
 		if (!isset($ids[$finding['id']])) {
 			$resultats[] = $finding;
 			$ids[$finding['id']] = true;

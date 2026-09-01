@@ -3,8 +3,14 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<div class="box">
-		<h2>Premier scan progressif</h2>
-		<p>PTM récupère uniquement des URLs publiques générées par SPIP, sans transmettre votre session administrateur. Chaque clic traite au maximum 5 pages.</p>
+		<h2>Inventaire de l’environnement SPIP</h2>
+		<p>PTM inventorie tous les plugins actifs. Les profils connus indiquent une capacité ou un traitement potentiel ; ils ne sont pas assimilés automatiquement à un traceur.</p>
+		[(#ENV*{plugins_html})]
+	</div>
+
+	<div class="box">
+		<h2>Scan progressif du site public</h2>
+		<p>PTM récupère uniquement des URLs publiques générées par SPIP, sans transmettre votre session administrateur. Chaque clic traite au maximum 5 pages. Le HTML rendu sert ensuite à confirmer les services réellement présents, les ressources externes inconnues et les formulaires susceptibles de collecter des données.</p>
 		[(#ENV*{resume_html})]
 	</div>
 
