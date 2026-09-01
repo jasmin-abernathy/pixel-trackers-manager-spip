@@ -55,6 +55,14 @@ function ptmspip_analyser_html($html, $page_url = '') {
 		}
 	}
 
+	include_spip('inc/ptmspip_forms');
+	foreach (ptmspip_extraire_formulaires_donnees($html, $page_url) as $finding) {
+		if (!isset($ids[$finding['id']])) {
+			$resultats[] = $finding;
+			$ids[$finding['id']] = true;
+		}
+	}
+
 	return $resultats;
 }
 
