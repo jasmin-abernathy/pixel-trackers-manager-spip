@@ -10,11 +10,13 @@ function formulaires_ptmspip_scan_charger_dist() {
 	}
 
 	include_spip('inc/ptmspip_scan');
+	include_spip('inc/ptmspip_plugins');
 	$scan = ptmspip_dernier_scan();
 
 	return [
 		'id_scan' => $scan ? (int) $scan['id_scan'] : 0,
 		'can_continue' => ($scan && $scan['statut'] === 'running') ? 'oui' : '',
+		'plugins_html' => ptmspip_resume_plugins_html(),
 		'resume_html' => ptmspip_resume_scan_html($scan ? (int) $scan['id_scan'] : 0),
 	];
 }
