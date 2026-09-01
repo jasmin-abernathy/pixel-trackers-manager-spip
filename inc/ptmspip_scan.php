@@ -109,6 +109,24 @@ function ptmspip_traiter_lot_scan($id_scan, $limite = 5) {
 	return ['processed' => $processed, 'finished' => ($pending === 0)];
 }
 
+/**
+ * Le crawl reste strictement sur le domaine du site, y compris après redirection.
+ * www. et le domaine nu sont considérés équivalents.
+ */
+function ptmspip_valider_url_scan($url) {
+	$site = (string) ($GLOBALS['meta']['adresse_site'] ?? '');
+	$site_host = strtolower((string) parse_url($site, PHP_URL_HOST));
+	$target_host = strtolower((string) parse_url((string) $url, PHP_URL_HOST));
+	$site_host = preg_replace('~^www\.~', '', $site_host);
+	$target_host = preg_replace('~^www\.~', '', $target_host);
+
+	if (!$site_host || !$target_host || $site_host !== $target_host) {
+		return false;
+	}
+
+	return (string) $url;
+}
+
 function ptmspip_scanner_une_url($row) {
 	$id_url = (int) ($row['id_url'] ?? 0);
 	$id_scan = (int) ($row['id_scan'] ?? 0);
@@ -125,6 +143,7 @@ function ptmspip_scanner_une_url($row) {
 		'taille_max' => 2 * 1024 * 1024,
 		'follow_location' => 3,
 		'headers' => ['User-Agent' => 'PTM-SPIP/0.0.2 local privacy scanner'],
+		'callback_valider_url' => 'ptmspip_valider_url_scan',
 	]);
 
 	if (!$res || empty($res['page'])) {
