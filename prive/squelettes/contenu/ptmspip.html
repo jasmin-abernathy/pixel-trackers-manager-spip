@@ -4,18 +4,23 @@
 
 <div class="notice">
 	<strong><:ptmspip:statut_dev:></strong>
-	<p>Le premier scanner réel est disponible en mode développement. Il lit uniquement le HTML public et ne modifie ni contenu, ni squelette, ni consentement.</p>
+	<p>PTM inventorie désormais l’environnement SPIP puis analyse le HTML public rendu. Il distingue intégration potentielle, collecte de données, service externe et preuve technique réellement observée.</p>
 </div>
 
 #FORMULAIRE_PTM_SPIP_SCAN
 
 <div class="box">
-	<h2>Limites de cette première version</h2>
+	<h2>Ce que cette version sait faire</h2>
 	<ul class="spip">
-		<li>accueil, articles publiés, rubriques publiées et page <code>mentions</code> sont recensés ;</li>
-		<li>5 pages maximum sont traitées par requête ;</li>
-		<li>les signatures connues sont classées comme preuves actives ;</li>
-		<li>les domaines tiers inconnus chargés par script, iframe, image, feuille de style ou média sont signalés pour vérification humaine ;</li>
-		<li>aucun mécanisme de blocage/consentement n’est encore activé.</li>
+		<li>inventorier tous les plugins SPIP actifs et reconnaître les profils RGPD connus ;</li>
+		<li>laisser visibles les plugins inconnus et signaler ceux dont le nom suggère une fonction liée aux données ;</li>
+		<li>recenser accueil, articles publiés, rubriques publiées et page <code>mentions</code> ;</li>
+		<li>traiter 5 pages maximum par requête ;</li>
+		<li>repérer 32 familles de services/traceurs externes connues ;</li>
+		<li>signaler les domaines tiers inconnus réellement chargés ;</li>
+		<li>repérer les formulaires rendus susceptibles de collecter e-mail, téléphone, identité, adresse, message, mot de passe ou fichier ;</li>
+		<li>signaler un formulaire qui envoie directement vers un autre domaine ;</li>
+		<li>ne jamais classer un simple lien sortant comme traceur.</li>
 	</ul>
+	<p><strong>Limite volontaire :</strong> aucun mécanisme de blocage/consentement n’est encore activé. La présence d’un plugin est une indication, jamais une preuve de traceur.</p>
 </div>
