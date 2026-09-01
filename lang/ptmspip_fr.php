@@ -4,12 +4,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-$GLOBALS[$GLOBALS['idx_lang']] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = [
 	'titre_menu' => 'Pixel Trackers Manager',
 	'titre_page' => 'Pixel Trackers Manager — SPIP',
-	'statut_dev' => 'Version de pré-développement',
-	'intro' => 'Le socle SPIP est installé. Le crawl réel et les fonctions de consentement restent désactivés tant qu’un site SPIP représentatif n’a pas été audité.',
+	'statut_dev' => 'Version de développement — premier scan réel',
+	'intro' => 'PTM analyse progressivement le HTML public rendu par SPIP, sans modifier le site.',
 	'environnement' => 'Environnement',
 	'fonctions_preparees' => 'Fonctions préparées',
-	'attente_audit' => 'En attente de l’audit du site',
-);
+	'attente_audit' => 'Audit du site de référence effectué',
+];
