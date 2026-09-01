@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_ptmspip_scan">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<div class="box">
+		<h2>Premier scan progressif</h2>
+		<p>PTM récupère uniquement des URLs publiques générées par SPIP, sans transmettre votre session administrateur. Chaque clic traite au maximum 5 pages.</p>
+		[(#ENV*{resume_html})]
+	</div>
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type="hidden" name="id_scan" value="#ENV{id_scan}" />
+			[(#ENV{can_continue}|oui)
+				<button type="submit" class="btn btn_secondaire" name="ptm_action" value="next">Analyser les 5 pages suivantes</button>
+			]
+			<button type="submit" class="btn btn_mini" name="ptm_action" value="start">Démarrer un nouveau scan</button>
+		</div>
+	</form>
+</div>
