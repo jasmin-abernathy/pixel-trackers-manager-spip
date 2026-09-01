@@ -1,0 +1,15 @@
+.env
+.env.*
+*.log
+*.sql
+*.sql.gz
+*.zip
+*.tar
+*.tar.gz
+*.pem
+*.key
+config/connect.php
+config/mes_options.local.php
+tmp/
+local/
+IMG/
