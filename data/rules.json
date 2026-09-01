@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "services": [
+    {"id":"google_analytics","label":"Google Analytics","category":"analytics","patterns":["googletagmanager.com/gtag/js","google-analytics.com/g/collect","google-analytics.com/analytics.js"]},
+    {"id":"google_tag_manager","label":"Google Tag Manager","category":"tag_manager","patterns":["googletagmanager.com/gtm.js","googletagmanager.com/ns.html"]},
+    {"id":"matomo","label":"Matomo","category":"analytics","patterns":["matomo.js","matomo.php"]},
+    {"id":"plausible","label":"Plausible Analytics","category":"analytics","patterns":["plausible.io/js/","plausible.io/api/event"]},
+    {"id":"youtube","label":"YouTube","category":"media","patterns":["youtube.com/embed/","youtube-nocookie.com/embed/"]},
+    {"id":"recaptcha","label":"Google reCAPTCHA","category":"security_external","patterns":["google.com/recaptcha/","g-recaptcha"]},
+    {"id":"google_fonts","label":"Google Fonts","category":"fonts","patterns":["fonts.googleapis.com","fonts.gstatic.com"]},
+    {"id":"meta_pixel","label":"Meta Pixel","category":"advertising","patterns":["connect.facebook.net/en_US/fbevents.js","facebook.com/tr?"]},
+    {"id":"brevo","label":"Brevo","category":"forms_marketing","patterns":["sibforms.com","sendinblue.com"]}
+  ]
+}
