@@ -1,0 +1,14 @@
+<paquet
+	prefix="ptmspip"
+	version="0.0.1-dev"
+	etat="dev"
+	compatibilite="[4.2.0;4.4.*]"
+	documentation="https://github.com/jasmin-abernathy/pixel-trackers-manager-spip"
+>
+	<nom>Pixel Trackers Manager — SPIP</nom>
+	<auteur lien="https://www.lepotager.org/">Le Potager du Web</auteur>
+	<licence>GNU/GPL v2 ou ultérieure</licence>
+
+	<pipeline nom="autoriser" inclure="ptmspip_autorisations.php" />
+	<menu nom="ptmspip" titre="ptmspip:titre_menu" />
+</paquet>
