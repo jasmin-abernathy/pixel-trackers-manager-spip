@@ -2,15 +2,26 @@
 
 Portage SPIP de **Pixel Trackers Manager (PTM)**, développé par **Le Potager du Web**.
 
-> État : `0.0.4` / `etat=dev` — scan progressif + inventaire de l'écosystème SPIP. À tester sur une copie exécutable avant toute utilisation en production.
+> État : `0.0.5` / `etat=dev` — scan progressif + inventaire de l'écosystème SPIP. À tester sur une copie exécutable avant toute utilisation en production.
+
+## Accès dans l'espace privé
+
+Après activation, PTM doit être accessible de deux façons :
+
+- **Activité → Pixel Trackers Manager** : tableau de bord, inventaire et scan ;
+- **Configuration → Configurer Pixel Trackers Manager** : page de configuration et lien vers le tableau de bord.
+
+Comme les plugins SPIP configurables tels que Crayons, la présence de `prive/squelettes/contenu/configurer_ptmspip.html` permet également à SPIP de proposer un bouton **Configurer** depuis la gestion des plugins lorsque l'interface le prend en charge.
+
+Aucun réglage n'est obligatoire dans cette version : PTM fonctionne localement et ne lance pas de scan automatiquement.
 
 ## Objectif
 
 Retrouver les principes de PTM WordPress dans l'écosystème SPIP : audit local-first, détection de traceurs et services tiers, cartographie des traitements, documentation de confidentialité, recommandations et, à terme, gestion du consentement.
 
-## Couverture SPIP — 0.0.4
+## Couverture SPIP — 0.0.5
 
-PTM ne dépend plus uniquement d'une liste de domaines. Il combine désormais :
+PTM combine désormais :
 
 - inventaire de **tous les plugins SPIP actifs** via l'API native ;
 - **45 profils RGPD** de plugins SPIP couvrant les principales familles pertinentes de SPIP 4.4 ;
@@ -24,7 +35,7 @@ PTM distingue explicitement : traceur observé, intégration potentielle, traite
 
 La présence de Formidable, GIS, oEmbed ou d'un plugin analytics n'est donc jamais transformée automatiquement en « tracker détecté » : le HTML rendu sert de preuve lorsque c'est possible.
 
-Les plugins **Crayons**, **Image Typo** et **Squelettes par rubrique** sont désormais connus comme fonctionnalités locales afin d'éviter de les présenter comme des alertes ou des traceurs.
+Les plugins **Crayons**, **Image Typo** et **Squelettes par rubrique** sont connus comme fonctionnalités locales afin d'éviter de les présenter comme des alertes ou des traceurs.
 
 Voir `docs/SPIP-ECOSYSTEM-COVERAGE.md` et `docs/REAL-WORLD-REGRESSION-CASES.md`.
 
@@ -60,17 +71,19 @@ Le scan ne modifie aucun contenu, aucun squelette et n'active aucun mécanisme d
 - `inc/ptmspip_scan.php` : recensement, file d'attente et traitement progressif ;
 - `base/ptmspip.php` : tables de stockage ;
 - `formulaires/ptmspip_scan.*` : interface CVT du scanner ;
-- `prive/squelettes/contenu/ptmspip.html` : page de l'espace privé ;
+- `prive/squelettes/contenu/ptmspip.html` : tableau de bord ;
+- `prive/squelettes/contenu/configurer_ptmspip.html` : page Configurer ;
 - `ptmspip_pipelines.php` : points d'accroche préparés pour la suite.
 
 ## Prochaine validation
 
-1. installer `0.0.4` sur une copie exécutable ;
-2. vérifier l'inventaire réel des plugins actifs ;
-3. lancer un scan complet par lots ;
-4. comparer les résultats au HTML et au réseau réellement servis ;
-5. corriger les faux positifs/faux négatifs ;
-6. ajouter ensuite le test navigateur pour les requêtes créées dynamiquement par JavaScript.
+1. installer `0.0.5` sur une copie exécutable ;
+2. vérifier les deux accès de menu et le bouton Configurer ;
+3. vérifier l'inventaire réel des plugins actifs ;
+4. lancer un scan complet par lots ;
+5. comparer les résultats au HTML et au réseau réellement servis ;
+6. corriger les faux positifs/faux négatifs ;
+7. ajouter ensuite le test navigateur pour les requêtes créées dynamiquement par JavaScript.
 
 ## Principes
 
@@ -81,16 +94,6 @@ Le scan ne modifie aucun contenu, aucun squelette et n'active aucun mécanisme d
 - un lien sortant n'est pas un tracker ;
 - distinguer preuve active, capacité, traitement et vérification humaine ;
 - ne jamais réécrire un squelette que PTM ne comprend pas.
-
-## Documentation
-
-- `docs/ARCHITECTURE.md`
-- `docs/PORTAGE-MATRIX.md`
-- `docs/AUDIT-SITE-SPIP.md`
-- `docs/FIRST-SCAN.md`
-- `docs/SPIP-ECOSYSTEM-COVERAGE.md`
-- `docs/REAL-WORLD-REGRESSION-CASES.md`
-- `docs/ROADMAP.md`
 
 ## Licence
 

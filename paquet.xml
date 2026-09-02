@@ -1,6 +1,6 @@
 <paquet
 	prefix="ptmspip"
-	version="0.0.4"
+	version="0.0.5"
 	etat="dev"
 	compatibilite="[4.3.0;4.4.*]"
 	schema="0.1.0"
@@ -16,5 +16,6 @@
 	<pipeline nom="affichage_final" inclure="ptmspip_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="ptmspip_pipelines.php" />
 
-	<menu nom="ptmspip" titre="ptmspip:titre_menu" parent="menu_activite" action="ptmspip" position="30" />
+	<menu nom="ptmspip" titre="ptmspip:titre_menu" parent="menu_activite" position="30" action="ptmspip" />
+	<menu nom="configurer_ptmspip" titre="ptmspip:titre_configurer" parent="menu_configuration" position="30" action="configurer_ptmspip" />
 </paquet>
