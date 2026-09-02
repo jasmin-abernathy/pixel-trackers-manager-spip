@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "catalog_version": "0.2.0",
+  "catalog_version": "0.2.1",
   "source": "jasmin-abernathy/ptm-rules",
   "plugins": [
     {"prefix":"stats","label":"Statistiques SPIP","role":"local_analytics","privacy_kind":"local_processing","severity":"review","services":[],"note":"Statistiques natives stockées côté SPIP. Ce n’est pas un service tiers, mais la mesure d’audience doit être documentée selon sa configuration."},
@@ -44,6 +44,9 @@
     {"prefix":"reservation_bank","label":"Réservations Bank","role":"payment_form","privacy_kind":"external_processing_capability","severity":"high","services":["stripe-js","paypal-sdk"],"note":"Paiement de réservations via Banque&paiement."},
     {"prefix":"pages","label":"Pages","role":"legal_content","privacy_kind":"legal_documentation","severity":"info","services":[],"note":"Peut héberger mentions légales, politique de confidentialité ou contact ; utile pour l’assistant documentaire PTM."},
     {"prefix":"import_ics","label":"Import ics","role":"external_sync","privacy_kind":"external_processing_capability","severity":"review","services":[],"note":"Importe des événements depuis des sites distants ; ce n’est pas du tracking visiteur mais c’est un échange externe."},
-    {"prefix":"ciimport","label":"ciimport","role":"personal_data_import_export","privacy_kind":"data_processing","severity":"high","services":[],"note":"Import/export d’auteurs et contributions : à intégrer à la cartographie des données personnelles."}
+    {"prefix":"ciimport","label":"ciimport","role":"personal_data_import_export","privacy_kind":"data_processing","severity":"high","services":[],"note":"Import/export d’auteurs et contributions : à intégrer à la cartographie des données personnelles."},
+    {"prefix":"crayons","label":"Crayons","role":"frontend_editing","privacy_kind":"local_functionality","severity":"info","services":[],"note":"Édition en place et requêtes AJAX locales pour les utilisateurs autorisés. Sa présence ne constitue ni un traceur ni un service tiers."},
+    {"prefix":"image_typo","label":"Image Typo","role":"local_image_generation","privacy_kind":"local_functionality","severity":"info","services":[],"note":"Génération locale d’images typographiques via PHP/GD. Aucun service tiers n’est impliqué par la seule présence du plugin."},
+    {"prefix":"squelettes_par_rubrique","label":"Squelettes par rubrique","role":"template_routing","privacy_kind":"local_functionality","severity":"info","services":[],"note":"Sélection locale de squelettes selon les rubriques. Fonction de rendu, pas un traitement tiers ni un traceur."}
   ]
 }
