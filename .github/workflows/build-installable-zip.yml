@@ -1,0 +1,59 @@
+name: Build PTM-SPIP installable ZIP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read plugin version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION=$(python3 - <<'PY'
+          import re
+          from pathlib import Path
+          text = Path('paquet.xml').read_text(encoding='utf-8')
+          m = re.search(r'version="([^"]+)"', text)
+          if not m:
+              raise SystemExit('Version introuvable dans paquet.xml')
+          print(m.group(1))
+          PY
+          )
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Build SPIP plugin archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/ptmspip
+          rsync -a ./ build/ptmspip/ \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='build/' \
+            --exclude='.gitignore'
+          cd build
+          zip -qr "ptmspip-${{ steps.version.outputs.version }}.zip" ptmspip
+          unzip -l "ptmspip-${{ steps.version.outputs.version }}.zip" | head -80
+
+      - name: Upload installable ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: ptmspip-${{ steps.version.outputs.version }}
+          path: build/ptmspip-${{ steps.version.outputs.version }}.zip
+          if-no-files-found: error
+          retention-days: 30
