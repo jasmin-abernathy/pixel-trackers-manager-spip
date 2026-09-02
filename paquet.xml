@@ -1,6 +1,6 @@
 <paquet
 	prefix="ptmspip"
-	version="0.0.3"
+	version="0.0.4"
 	etat="dev"
 	compatibilite="[4.3.0;4.4.*]"
 	schema="0.1.0"

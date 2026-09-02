@@ -2,19 +2,19 @@
 
 Portage SPIP de **Pixel Trackers Manager (PTM)**, développé par **Le Potager du Web**.
 
-> État : `0.0.3` / `etat=dev` — scan progressif + inventaire de l'écosystème SPIP. À tester sur une copie exécutable avant toute utilisation en production.
+> État : `0.0.4` / `etat=dev` — scan progressif + inventaire de l'écosystème SPIP. À tester sur une copie exécutable avant toute utilisation en production.
 
 ## Objectif
 
 Retrouver les principes de PTM WordPress dans l'écosystème SPIP : audit local-first, détection de traceurs et services tiers, cartographie des traitements, documentation de confidentialité, recommandations et, à terme, gestion du consentement.
 
-## Couverture SPIP — 0.0.3
+## Couverture SPIP — 0.0.4
 
 PTM ne dépend plus uniquement d'une liste de domaines. Il combine désormais :
 
 - inventaire de **tous les plugins SPIP actifs** via l'API native ;
-- **42 profils RGPD** de plugins SPIP couvrant les principales familles pertinentes de SPIP 4.4 ;
-- **32 signatures techniques** de services/traceurs dans PTM Rules 0.2.0 ;
+- **45 profils RGPD** de plugins SPIP couvrant les principales familles pertinentes de SPIP 4.4 ;
+- **32 signatures techniques** de services/traceurs dans PTM Rules 0.2.1 ;
 - analyse du HTML réellement rendu ;
 - détection générique de ressources tierces inconnues ;
 - détection des formulaires susceptibles de collecter des données personnelles ;
@@ -24,13 +24,15 @@ PTM distingue explicitement : traceur observé, intégration potentielle, traite
 
 La présence de Formidable, GIS, oEmbed ou d'un plugin analytics n'est donc jamais transformée automatiquement en « tracker détecté » : le HTML rendu sert de preuve lorsque c'est possible.
 
-Voir `docs/SPIP-ECOSYSTEM-COVERAGE.md`.
+Les plugins **Crayons**, **Image Typo** et **Squelettes par rubrique** sont désormais connus comme fonctionnalités locales afin d'éviter de les présenter comme des alertes ou des traceurs.
 
-## Audit réel déjà effectué
+Voir `docs/SPIP-ECOSYSTEM-COVERAGE.md` et `docs/REAL-WORLD-REGRESSION-CASES.md`.
 
-Une copie du site SPIP Vues Imprenables a été analysée le 1er septembre 2026. Cet audit a confirmé notamment la nécessité d'analyser le HTML public rendu, car les contenus SPIP via `#TEXTE`, les modèles et les plugins peuvent introduire des services absents des fichiers de squelette.
+## Validation sur site réel
 
-Voir `docs/AUDIT-VUESIMPRENABLES-2026-09-01.md`.
+Une copie d'un site SPIP réel a été analysée en septembre 2026. Cette analyse a confirmé notamment la nécessité d'analyser le HTML public rendu, car les contenus SPIP via `#TEXTE`, les modèles, `#INSERT_HEAD` et les plugins peuvent introduire des services absents des fichiers de squelette.
+
+Elle a aussi fourni plusieurs cas de régression : formulaire local collectant e-mail/sujet/message, anti-spam local, fonctionnalités AJAX locales et URL externes uniquement présentes dans des commentaires de scripts.
 
 ## Scan progressif
 
@@ -63,7 +65,7 @@ Le scan ne modifie aucun contenu, aucun squelette et n'active aucun mécanisme d
 
 ## Prochaine validation
 
-1. installer `0.0.3` sur une copie exécutable ;
+1. installer `0.0.4` sur une copie exécutable ;
 2. vérifier l'inventaire réel des plugins actifs ;
 3. lancer un scan complet par lots ;
 4. comparer les résultats au HTML et au réseau réellement servis ;
@@ -85,9 +87,9 @@ Le scan ne modifie aucun contenu, aucun squelette et n'active aucun mécanisme d
 - `docs/ARCHITECTURE.md`
 - `docs/PORTAGE-MATRIX.md`
 - `docs/AUDIT-SITE-SPIP.md`
-- `docs/AUDIT-VUESIMPRENABLES-2026-09-01.md`
 - `docs/FIRST-SCAN.md`
 - `docs/SPIP-ECOSYSTEM-COVERAGE.md`
+- `docs/REAL-WORLD-REGRESSION-CASES.md`
 - `docs/ROADMAP.md`
 
 ## Licence

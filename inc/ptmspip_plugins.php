@@ -134,6 +134,7 @@ function ptmspip_statut_plugin($privacy_kind) {
 		'data_collection_capability' => 'capability_detected',
 		'data_processing' => 'data_processing',
 		'local_processing' => 'local_processing',
+		'local_functionality' => 'local_only',
 		'external_processing' => 'external_processing',
 		'external_processing_capability' => 'external_capability',
 		'external_content_capability' => 'external_capability',

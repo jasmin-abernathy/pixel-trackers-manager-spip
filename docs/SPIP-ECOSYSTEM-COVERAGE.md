@@ -1,4 +1,4 @@
-# Couverture de l'écosystème SPIP — 2026-09-01
+# Couverture de l'écosystème SPIP — 2026-09-02
 
 ## Objectif
 
@@ -15,7 +15,7 @@ La présence d'un plugin n'est jamais une preuve de traceur.
 
 ## Familles SPIP couvertes
 
-Le catalogue 0.2.0 couvre en priorité les familles pertinentes de l'écosystème SPIP 4.4 :
+Le catalogue 0.2.1 contient **45 profils SPIP** et couvre en priorité les familles pertinentes de l'écosystème SPIP 4.4 :
 
 - statistiques : Stats, Stats objets, Google Analytics, Matomo, Umami ;
 - formulaires et contributions : Formidable, Saisies, Contact, Contact libre, CVT Upload, Forum, Comments, Pétitions, inscriptions Agenda ;
@@ -27,7 +27,10 @@ Le catalogue 0.2.0 couvre en priorité les familles pertinentes de l'écosystèm
 - avatars : Gravatar ;
 - consentement : Tarteaucitron, Cookiebar, CookieChoices, CIBC ;
 - paiements : Banque&paiement, Formidable paiement, Reservation Bank + signatures Stripe/PayPal ;
-- documentation et échanges de données : Pages, Import ICS, ciimport.
+- documentation et échanges de données : Pages, Import ICS, ciimport ;
+- fonctionnalités locales connues : Crayons, Image Typo, Squelettes par rubrique.
+
+Les trois derniers profils sont explicitement classés `local_functionality`. Ils sont connus de PTM afin de réduire le bruit, sans être transformés en alerte RGPD.
 
 ## Plugins inconnus
 
@@ -53,16 +56,20 @@ Il signale également une action de formulaire HTTP(S) qui pointe directement ve
 
 Cette heuristique permet de repérer une collecte même si elle vient d'un squelette maison ou d'un plugin que PTM ne connaît pas.
 
+Un cas réel a confirmé qu'un formulaire local de type contact peut collecter e-mail, sujet et message tout en utilisant un anti-spam local : PTM doit signaler la collecte sans inventer de CAPTCHA tiers ni de traceur.
+
 ## Services techniques
 
-PTM Rules 0.2.0 embarqué par le plugin contient 32 signatures techniques. Les services reconnus dans le HTML sont des preuves actives ; les services seulement associés à un plugin restent des possibilités à confirmer.
+PTM Rules 0.2.1 embarqué par le plugin contient 32 signatures techniques. Les services reconnus dans le HTML sont des preuves actives ; les services seulement associés à un plugin restent des possibilités à confirmer.
 
 ## Garde-fous
 
 - un simple lien sortant n'est pas un tracker ;
+- une URL présente uniquement dans un commentaire ou une licence de fichier JavaScript ne doit pas devenir une preuve de service actif lors d'un futur scan statique ;
 - Stats SPIP est classé comme traitement local, pas comme service tiers ;
 - Saisies est une capacité de formulaire, pas une collecte prouvée ;
 - NoSPAM et Captcha Addition ne sont pas confondus avec un CAPTCHA distant ;
+- Crayons, Image Typo et Squelettes par rubrique sont des fonctionnalités locales connues ;
 - un CMP n'est pas un tracker ;
 - un plugin de cartographie ou oEmbed peut avoir plusieurs fournisseurs : le HTML rendu décide du fournisseur réellement utilisé.
 
