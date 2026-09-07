@@ -1,10 +1,16 @@
 name: Build PTM-SPIP installable ZIP
 
 on:
-  push:
-    branches:
-      - main
+  # Packaging is intentionally opt-in. Normal development commits do not need
+  # to spend Actions minutes creating a ZIP that nobody downloads.
   workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+concurrency:
+  group: ptm-spip-package-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -15,6 +21,7 @@ env:
 jobs:
   package:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,4 +63,4 @@ jobs:
           name: ptmspip-${{ steps.version.outputs.version }}
           path: build/ptmspip-${{ steps.version.outputs.version }}.zip
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 7
